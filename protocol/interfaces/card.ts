@@ -52,9 +52,21 @@ export namespace ICard {
   }
 
   export enum UnitCardType {
+    /**
+     * 普通单位
+     */
     normal = 1,
+    /**
+     * 触发单位
+     */
     trigger = 2,
+    /**
+     * G 单位
+     */
     g = 3,
+    /**
+     * 衍生物
+     */
     token = 4,
   }
 
@@ -62,6 +74,9 @@ export namespace ICard {
    * 单位卡的信息
    */
   export interface UnitCardInfo extends BaseCardInfo {
+    /**
+     * 单位类型
+     */
     unitType: UnitCardType;
   }
 
