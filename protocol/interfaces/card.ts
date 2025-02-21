@@ -1,6 +1,13 @@
 import { IUtils } from "./utils";
 
-export namespace ICard {
+/**
+ * 卡片信息命名空间
+ *
+ * 记录卡片印刷信息
+ *
+ * @since 1.0.0
+ */
+export namespace ICardInfo {
   /**
    * 卡片类型
    */
