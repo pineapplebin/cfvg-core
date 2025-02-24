@@ -1,4 +1,5 @@
-import { IUtils } from "./utils";
+import { IAbilityDefinition } from './ability';
+import { IUtils } from './utils';
 
 /**
  * 卡片信息命名空间
@@ -56,6 +57,11 @@ export namespace ICardInfo {
      * 卡片类型
      */
     cardType: CardType;
+
+    /**
+     * 卡片效果
+     */
+    abilities: IAbilityDefinition.Ability[];
   }
 
   export enum UnitCardType {

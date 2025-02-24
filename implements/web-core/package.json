@@ -1,5 +1,16 @@
 {
   "name": "@pineapple-bin/cfvg-web-core",
   "version": "0.0.1",
-  "author": "pineapple-bin <pineapplewing@126.com>"
+  "author": "pineapple-bin <pineapplewing@126.com>",
+  "type": "module",
+  "scripts": {
+    "dev": "vitest",
+    "build": "tsup-node && tsc"
+  },
+  "devDependencies": {
+    "@pineapple-bin/cfvg-protocol": "workspace:^1.0.0"
+  },
+  "peerDependencies": {
+    "@pineapple-bin/cfvg-protocol": "^1.0.0"
+  }
 }
