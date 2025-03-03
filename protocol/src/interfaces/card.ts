@@ -1,5 +1,5 @@
-import { IAbilityDefinition } from './ability';
-import { IUtils } from './utils';
+import { NAbilityStructure } from './ability.js';
+import { NUtils } from './utils.js';
 
 /**
  * 卡片信息命名空间
@@ -8,7 +8,7 @@ import { IUtils } from './utils';
  *
  * @since 1.0.0
  */
-export namespace ICardInfo {
+export namespace NCardStructure {
   /**
    * 卡片类型
    */
@@ -50,7 +50,7 @@ export namespace ICardInfo {
     /**
      * 本地化名称
      */
-    localeNameMap: Partial<Record<IUtils.Locale, string>> &
+    localeNameMap: Partial<Record<NUtils.Locale, string>> &
       Record<string, string>;
 
     /**
@@ -61,7 +61,7 @@ export namespace ICardInfo {
     /**
      * 卡片效果
      */
-    abilities: IAbilityDefinition.Ability[];
+    abilities: NAbilityStructure.Ability[];
   }
 
   export enum UnitCardType {

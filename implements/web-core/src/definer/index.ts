@@ -23,3 +23,53 @@
 //
 
 // 【起】： condition? action
+// 【自】：timing condition? action
+// 【永】：timing? condition? action
+
+import { NAbilityStructure } from '@pineapple-bin/cfvg-protocol';
+
+/**
+ * 【自】：这个单位被RIDE时，你是后攻的话，抽1张卡。
+ */
+class DemoAbility implements NAbilityStructure.Ability {
+  kind: NAbilityStructure.BaseAbilityKind;
+  sentences: NAbilityStructure.SentencePattern[];
+
+  constructor() {
+    this.kind = {
+      kind: 'AUTO',
+      keywords: [],
+      availableZones: [],
+      isOncePerTurn: false,
+    };
+
+    this.sentences = [
+      {
+        uniqueKey: 'WhenIfDo',
+        clauses: [
+          // x 单位被RIDE时
+          {
+            uniqueKey: 'WhenUnitIsRodeUpon',
+            type: NAbilityStructure.ClauseType.timing,
+            variables: [{ type: 'Unit', value: 'this' }],
+          },
+          // x 是后攻的话
+          {
+            uniqueKey: 'IfWentSecond',
+            type: NAbilityStructure.ClauseType.condition,
+            variables: [{ type: 'Fighter', value: 'you' }],
+          },
+          // 你抽 x 张卡
+          {
+            uniqueKey: 'DrawCard',
+            type: NAbilityStructure.ClauseType.action,
+            variables: [
+              { type: 'Fighter', value: 'you' },
+              { type: 'Number', value: 1 },
+            ],
+          },
+        ],
+      },
+    ];
+  }
+}
