@@ -3,9 +3,18 @@
   "version": "0.0.1",
   "author": "pineapple-bin <pineapplewing@126.com>",
   "type": "module",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "vitest",
-    "build": "tsup-node && tsc"
+    "build": "rimraf dist && tsup-node"
   },
   "devDependencies": {
     "@pineapple-bin/cfvg-protocol": "workspace:^1.0.0"

@@ -20,21 +20,19 @@ export namespace NAbilityStructure {
      */
     kind: string;
     /**
-     * 能力的可用领域
+     * 能力发动的要求
      */
-    availableZones: string[];
-    /**
-     * 能力关键字
-     */
-    keywords: BaseKeyword[];
-    /**
-     * 是否为一回合一次
-     */
-    isOncePerTurn: boolean;
+    requirements?: BaseRequirement[];
   }
 
   export interface BaseKeyword {
     keyword: string;
+    variables?: AbilityVariable[];
+  }
+
+  export interface BaseRequirement {
+    type: string;
+    variables?: AbilityVariable[];
   }
 
   /**
@@ -44,33 +42,17 @@ export namespace NAbilityStructure {
    */
   export interface Ability {
     /**
+     * 能力关键字
+     */
+    keywords?: BaseKeyword[];
+    /**
      * 能力类型
      */
     kind: BaseAbilityKind;
     /**
      * 能力具体句子内容
      */
-    sentences: SentencePattern[];
-  }
-
-  /**
-   * 句式
-   *
-   * 句式控制执行流程
-   */
-  export interface SentencePattern {
-    /**
-     * 句式的唯一标识
-     *
-     * 不能重复，具体逻辑实现需要一一对应实现
-     */
-    uniqueKey: string;
-    /**
-     * 子句列表
-     *
-     * 根据句式，有不同固定数量/类型的子句
-     */
-    clauses: Clause[];
+    sentences: Clause[];
   }
 
   export enum ClauseType {
@@ -93,6 +75,11 @@ export namespace NAbilityStructure {
      * 替代规则子句
      */
     alternate = 4,
+
+    /**
+     * 控制负责流程的子句
+     */
+    meta = 5,
   }
 
   export interface Clause {
@@ -111,12 +98,18 @@ export namespace NAbilityStructure {
     /**
      * 子句的变量
      */
-    variables?: ClauseVariable[];
+    variables?: AbilityVariable[];
     /**
      * 子句的子句
      */
     clauses?: Clause[];
   }
 
-  export interface ClauseVariable {}
+  /**
+   * 子句使用的变量
+   */
+  export interface AbilityVariable {
+    type: string;
+    value: any;
+  }
 }
