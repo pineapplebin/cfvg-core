@@ -1,12 +1,12 @@
 import { NCore } from '../spec.js';
 
-export type TStringMetadata = 'string';
+export type TStringMetadata = NCore.VariableMetadataDefine<'string'>;
 export type TStringType = NCore.MetadataToType<TStringMetadata>;
 
 export class CoreString extends NCore.AbstractVariable<TStringType> {
   static typeName = 'String' as const;
-  static metadata = 'string' as const;
-  value: string;
+  static metadata: TStringMetadata = 'string';
+  value: TStringType;
 
   constructor(val: any) {
     super();
@@ -14,13 +14,13 @@ export class CoreString extends NCore.AbstractVariable<TStringType> {
   }
 }
 
-export type TNumberMetadata = 'number';
+export type TNumberMetadata = NCore.VariableMetadataDefine<'number'>;
 export type TNumberType = NCore.MetadataToType<TNumberMetadata>;
 
 export class CoreNumber extends NCore.AbstractVariable<TNumberType> {
   static typeName = 'Number' as const;
-  static metadata = 'number' as const;
-  value: number;
+  static metadata: TNumberMetadata = 'number';
+  value: TNumberType;
 
   constructor(val: any) {
     super();
@@ -28,13 +28,13 @@ export class CoreNumber extends NCore.AbstractVariable<TNumberType> {
   }
 }
 
-export type TBooleanMetadata = 'boolean';
+export type TBooleanMetadata = NCore.VariableMetadataDefine<'boolean'>;
 export type TBooleanType = NCore.MetadataToType<TBooleanMetadata>;
 
 export class CoreBoolean extends NCore.AbstractVariable<TBooleanType> {
   static typeName = 'Boolean' as const;
-  static metadata = 'boolean' as const;
-  value: boolean;
+  static metadata: TBooleanMetadata = 'boolean';
+  value: TBooleanType;
 
   constructor(val: any) {
     super();

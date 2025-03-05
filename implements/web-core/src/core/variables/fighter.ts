@@ -3,14 +3,13 @@ import { NCore } from '../spec.js';
 export enum EFighter {
   you = 'you',
   opponent = 'opponent',
+  any = 'any',
+  both = 'both',
 }
 
-export type TFighterMetadata = {
-  enums: [
-    { name: '你'; value: EFighter.you },
-    { name: '对手'; value: EFighter.opponent }
-  ];
-};
+export type TFighterMetadata = NCore.VariableMetadataDefine<{
+  enums: { name: string; value: EFighter }[];
+}>;
 export type TFighterType = NCore.MetadataToType<TFighterMetadata>;
 
 export class CoreFighter extends NCore.AbstractVariable<TFighterType> {
@@ -19,6 +18,8 @@ export class CoreFighter extends NCore.AbstractVariable<TFighterType> {
     enums: [
       { name: '你', value: EFighter.you },
       { name: '对手', value: EFighter.opponent },
+      { name: '任一', value: EFighter.any },
+      { name: '全都', value: EFighter.both },
     ],
   };
 

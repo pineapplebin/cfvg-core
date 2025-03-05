@@ -12,10 +12,10 @@ export namespace NCore {
   export type VariableTypeMetadataObjectType = {
     fields: VariableTypeMetadataComplexTypeField[];
   };
-  export type VariableTypeMetadataEnumType = {
+  export type VariableTypeMetadataEnumType<T = any> = {
     enums: {
       name: string;
-      value: string | number | boolean;
+      value: T;
     }[];
   };
 
@@ -23,6 +23,8 @@ export namespace NCore {
     | VariableTypeMetadataBasicType
     | VariableTypeMetadataObjectType
     | VariableTypeMetadataEnumType;
+
+  export type VariableMetadataDefine<T extends VariableTypeMetadata> = T;
 
   export type MetadataToType<M extends VariableTypeMetadata> =
     M extends 'string'

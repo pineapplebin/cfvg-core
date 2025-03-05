@@ -1,6 +1,7 @@
-import { NCore } from '../spec.js';
 import { CoreBoolean, CoreNumber, CoreString } from './basic.js';
 import { CoreFighter } from './fighter.js';
+
+export type AllVariableTypeNames = (typeof defineVariables)[number]['typeName'];
 
 export const defineVariables = [
   CoreString,
@@ -8,5 +9,3 @@ export const defineVariables = [
   CoreBoolean,
   CoreFighter,
 ];
-
-export type AllVariableTypeNames = (typeof defineVariables)[number]['typeName'];
