@@ -1,4 +1,4 @@
-import type { NAbilityStructure } from '@pineapple-bin/cfvg-protocol';
+import type { NAbilityStructure } from '@bin-cfvg/protocol';
 import type { LimitVariable } from './variables.js';
 import type { FillUpClauseTypes } from './sentence.js';
 

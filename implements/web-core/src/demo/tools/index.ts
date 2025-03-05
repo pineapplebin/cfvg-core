@@ -7,7 +7,7 @@ export * from './ability.js';
 export * from './sentence.js';
 export * from './clause.def.js';
 
-import { NAbilityStructure } from '@pineapple-bin/cfvg-protocol';
+import { NAbilityStructure } from '@bin-cfvg/protocol';
 const ClauseType = NAbilityStructure.ClauseType;
 
 export { ClauseType };

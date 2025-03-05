@@ -2,7 +2,7 @@ import {
   NAbilityStructure,
   NCardStructure,
   type NUtils,
-} from '@pineapple-bin/cfvg-protocol';
+} from '@bin-cfvg/protocol';
 
 type DefineCardParams = Pick<
   NCardStructure.UnitCardInfo,

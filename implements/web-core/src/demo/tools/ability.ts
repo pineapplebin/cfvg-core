@@ -1,4 +1,4 @@
-import type { NAbilityStructure } from '@pineapple-bin/cfvg-protocol';
+import type { NAbilityStructure } from '@bin-cfvg/protocol';
 import { Vars, variable } from './variables.js';
 
 export enum Kinds {

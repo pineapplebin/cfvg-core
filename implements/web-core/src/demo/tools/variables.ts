@@ -1,4 +1,4 @@
-import type { NAbilityStructure } from '@pineapple-bin/cfvg-protocol';
+import type { NAbilityStructure } from '@bin-cfvg/protocol';
 
 type VariableDef<TypeName extends string, ValueType> = [TypeName, ValueType];
 type Clean<Item extends readonly unknown[]> = Item extends VariableDef<

@@ -1,5 +1,5 @@
 {
-  "name": "@pineapple-bin/cfvg-protocol",
+  "name": "@bin-cfvg/protocol",
   "version": "1.0.0",
   "author": "pineapple-bin <pineapplewing@126.com>",
   "type": "module",

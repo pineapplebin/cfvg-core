@@ -1,7 +1,7 @@
 import {
   type NCardStructure,
   NAbilityStructure,
-} from '@pineapple-bin/cfvg-protocol';
+} from '@bin-cfvg/protocol';
 import type { NCore } from '../core/spec.js';
 
 export namespace NCoreWriter {

@@ -27,9 +27,11 @@ importers:
         specifier: ^3.0.7
         version: 3.0.7
 
+  implements/effect-graph-editor: {}
+
   implements/web-core:
     devDependencies:
-      '@pineapple-bin/cfvg-protocol':
+      '@bin-cfvg/protocol':
         specifier: workspace:^1.0.0
         version: link:../../protocol
 

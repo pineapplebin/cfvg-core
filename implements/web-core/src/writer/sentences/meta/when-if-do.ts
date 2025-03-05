@@ -1,4 +1,4 @@
-import { NAbilityStructure } from '@pineapple-bin/cfvg-protocol';
+import { NAbilityStructure } from '@bin-cfvg/protocol';
 import { type NCoreWriter, predefine } from '../../spec.js';
 
 export type TMetadata = NCoreWriter.ClauseMetadata<
