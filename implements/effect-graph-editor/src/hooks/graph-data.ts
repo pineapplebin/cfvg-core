@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 export interface GraphDataState {
   nodes: NEffectGraph.Nodes[];
+  dropdownMenuOpenConfig: { x: number; y: number } | null;
+  setDropdownMenuOpenConfig: (config: { x: number; y: number } | null) => void;
 }
 
 export const ENTRY_ID = '$$effect-graph:entry';
@@ -19,8 +21,14 @@ function initEntryNode(): NEffectGraph.EntryNode {
 
 export function useGraphDataStore(): GraphDataState {
   const [nodes, setNodes] = useState<NEffectGraph.Nodes[]>([initEntryNode()]);
+  const [dropdownMenuOpenConfig, setDropdownMenuOpenConfig] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
 
   return {
     nodes,
+    dropdownMenuOpenConfig,
+    setDropdownMenuOpenConfig,
   };
 }

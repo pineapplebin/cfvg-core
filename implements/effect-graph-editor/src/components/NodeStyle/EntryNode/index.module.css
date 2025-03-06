@@ -9,8 +9,14 @@
 }
 
 .handle {
-  width: 14px;
-  height: 14px;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 0;
 }
 
 .desc {

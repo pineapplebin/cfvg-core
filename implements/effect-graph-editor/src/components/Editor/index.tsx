@@ -10,6 +10,7 @@ import {
 } from '@xyflow/react';
 import { useNodeTypes } from '@/hooks/component-types';
 import { useGraphDataStore } from '@/hooks/graph-data';
+import DropdownMenu from '../DropdownMenu';
 
 import styles from './index.module.css';
 
@@ -23,8 +24,12 @@ const Editor: FC = () => {
     ev,
     connection
   ) => {
-    //
+    console.log(ev, connection);
+    if (!('clientX' in ev)) {
+      return;
+    }
     if (!connection.toNode && !connection.toHandle) {
+      state.setDropdownMenuOpenConfig({ x: ev.clientX, y: ev.clientY });
     }
   };
 
@@ -35,11 +40,15 @@ const Editor: FC = () => {
         nodes={state.nodes}
         proOptions={proOptions}
         nodesDraggable
-        onConnectEnd={console.log}
+        onConnectEnd={handleOnConnectEnd}
       >
         <Background variant={BackgroundVariant.Cross} />
         <Controls />
       </ReactFlow>
+      <DropdownMenu
+        openConfig={state.dropdownMenuOpenConfig}
+        onOpenChange={() => state.setDropdownMenuOpenConfig(null)}
+      />
     </div>
   );
 };

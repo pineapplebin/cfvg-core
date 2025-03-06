@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import { Handle, Position, type NodeProps } from '@xyflow/react';
+import { ThickArrowRightIcon } from '@radix-ui/react-icons';
 import type { NEffectGraph } from '@/types';
 
 import styles from './index.module.css';
@@ -14,7 +15,13 @@ const EntryNode: FC<EntryNodeProps> = ({ data }) => {
           className={styles.handle}
           type="source"
           position={Position.Bottom}
-        />
+        >
+          <ThickArrowRightIcon
+            width="100%"
+            height="100%"
+            style={{ pointerEvents: 'none' }}
+          />
+        </Handle>
       </div>
       <div className={styles.desc}>{data.desc}</div>
     </div>
