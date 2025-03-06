@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import type { NodeTypes } from '@xyflow/react';
-import Node from '@/components/NodeStyle/Node';
+import EntryNode from '@/components/NodeStyle/EntryNode';
 
 const componentNodeTypes: NodeTypes = {
-  test: Node,
+  entry: EntryNode,
 };
 
 export function useNodeTypes() {
