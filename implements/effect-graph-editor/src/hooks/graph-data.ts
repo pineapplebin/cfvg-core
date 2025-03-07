@@ -1,10 +1,11 @@
+import type { NInternal } from '@/internal/types';
 import type { NEffectGraph } from '@/types';
 import { useState } from 'react';
 
 export interface GraphDataState {
   nodes: NEffectGraph.Nodes[];
-  dropdownMenuOpenConfig: { x: number; y: number } | null;
-  setDropdownMenuOpenConfig: (config: { x: number; y: number } | null) => void;
+  menuOpenConfig: NInternal.OpenMenuConfig | null;
+  setMenuOpenConfig: (config: NInternal.OpenMenuConfig | null) => void;
 }
 
 export const ENTRY_ID = '$$effect-graph:entry';
@@ -21,14 +22,12 @@ function initEntryNode(): NEffectGraph.EntryNode {
 
 export function useGraphDataStore(): GraphDataState {
   const [nodes, setNodes] = useState<NEffectGraph.Nodes[]>([initEntryNode()]);
-  const [dropdownMenuOpenConfig, setDropdownMenuOpenConfig] = useState<{
-    x: number;
-    y: number;
-  } | null>(null);
+  const [menuOpenConfig, setMenuOpenConfig] =
+    useState<NInternal.OpenMenuConfig | null>(null);
 
   return {
     nodes,
-    dropdownMenuOpenConfig,
-    setDropdownMenuOpenConfig,
+    menuOpenConfig,
+    setMenuOpenConfig,
   };
 }

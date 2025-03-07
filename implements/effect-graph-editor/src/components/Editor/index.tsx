@@ -1,12 +1,11 @@
-import type { FC } from 'react';
+import { useCallback, type FC } from 'react';
 import {
   ReactFlow,
   Background,
   Controls,
   BackgroundVariant,
-  type Node,
   type ProOptions,
-  type ReactFlowProps,
+  type OnConnectEnd,
 } from '@xyflow/react';
 import { useNodeTypes } from '@/hooks/component-types';
 import { useGraphDataStore } from '@/hooks/graph-data';
@@ -20,18 +19,39 @@ const Editor: FC = () => {
   const nodeTypes = useNodeTypes();
   const state = useGraphDataStore();
 
-  const handleOnConnectEnd: ReactFlowProps['onConnectEnd'] = (
-    ev,
-    connection
-  ) => {
-    console.log(ev, connection);
-    if (!('clientX' in ev)) {
-      return;
-    }
-    if (!connection.toNode && !connection.toHandle) {
-      state.setDropdownMenuOpenConfig({ x: ev.clientX, y: ev.clientY });
-    }
-  };
+  const handleOnConnectEnd = useCallback<OnConnectEnd>(
+    (ev, connection) => {
+      console.log(ev, connection);
+      if (!connection.toNode && !connection.toHandle) {
+        if ('clientX' in ev) {
+          state.setMenuOpenConfig({
+            x: ev.clientX,
+            y: ev.clientY,
+            config: {
+              items: [
+                {
+                  type: 'sub-group',
+                  label: '添加',
+                  items: [
+                    {
+                      type: 'item',
+                      label: '添加节点',
+                      onClick: () => {
+                        console.log('add node');
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          });
+        } else {
+          // show popup menu
+        }
+      }
+    },
+    [state.setMenuOpenConfig]
+  );
 
   return (
     <div className={styles.container}>
@@ -46,8 +66,8 @@ const Editor: FC = () => {
         <Controls />
       </ReactFlow>
       <DropdownMenu
-        openConfig={state.dropdownMenuOpenConfig}
-        onOpenChange={() => state.setDropdownMenuOpenConfig(null)}
+        openConfig={state.menuOpenConfig}
+        onOpenChange={() => state.setMenuOpenConfig(null)}
       />
     </div>
   );
