@@ -1,11 +1,23 @@
 import ReactDOM from 'react-dom';
-import { GraphEditor } from '../src';
+import { GraphEditor, type NEffectGraph } from '../src';
 import './normalize.css';
 
 async function main() {
+  const value: NEffectGraph.EffectLogic = {
+    nodes: [
+      {
+        id: 'entry',
+        type: 'entry',
+        position: { x: 0, y: 0 },
+        data: { desc: '效果' },
+      },
+    ],
+    edges: [],
+  };
+
   ReactDOM.render(
     <div style={{ height: '100vh', width: '100vw' }}>
-      <GraphEditor />
+      <GraphEditor initialValue={value} />
     </div>,
     document.getElementById('app')
   );

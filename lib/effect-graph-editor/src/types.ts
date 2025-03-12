@@ -1,4 +1,4 @@
-import type { Node } from '@xyflow/react';
+import type { Edge, Node } from '@xyflow/react';
 
 type AnyKv = Record<string, any>;
 
@@ -35,4 +35,9 @@ export namespace NEffectGraph {
       outputs: Value[];
     }
   }
+
+  export type EffectLogic = {
+    nodes: Nodes[];
+    edges: Edge[];
+  };
 }

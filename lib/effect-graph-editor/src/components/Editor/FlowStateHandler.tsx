@@ -1,24 +1,44 @@
-import type { FC, PropsWithChildren } from 'react';
-import {
-  ReactFlow,
-  useStoreApi,
-  type ProOptions,
-  type ReactFlowProps,
-} from '@xyflow/react';
-import { preventDefault } from '@/tools/ahooks';
+import type { FC, PropsWithChildren, ReactNode } from 'react';
+import { ReactFlow, type ProOptions, type OnConnectEnd } from '@xyflow/react';
+import { preventDefault, useMemorizedFn } from '@/tools/ahooks';
 import { useNodeTypes } from '@/data/component-types';
+import { useEditorStore } from '@/store';
 
-export type ExposedReactFlowProps = Pick<ReactFlowProps, 'id'>;
-export interface FlowStateHandlerProps extends ExposedReactFlowProps {}
+export interface FlowStateHandlerProps {}
 
 const proOptions: ProOptions = { hideAttribution: true };
 
 const FlowStateHandler: FC<PropsWithChildren<FlowStateHandlerProps>> = ({
   children,
-  ...exposedProps
 }) => {
-  const api = useStoreApi();
   const nodeTypes = useNodeTypes();
+  const { setOpenMenuConfig } = useEditorStore(({ setOpenMenuConfig }) => ({
+    setOpenMenuConfig,
+  }));
+
+  const handleConnectEnd = useMemorizedFn<OnConnectEnd>((ev, connection) => {
+    if (!('touches' in ev) && !connection.toNode && !connection.toHandle) {
+      setOpenMenuConfig({
+        x: ev.clientX,
+        y: ev.clientY,
+        config: {
+          items: [
+            {
+              type: 'sub-group',
+              label: '新增',
+              items: [
+                {
+                  type: 'item',
+                  label: '节点',
+                  onClick: () => console.log('新增节点'),
+                },
+              ],
+            },
+          ],
+        },
+      });
+    }
+  });
 
   return (
     <ReactFlow
@@ -27,7 +47,7 @@ const FlowStateHandler: FC<PropsWithChildren<FlowStateHandlerProps>> = ({
       nodeTypes={nodeTypes}
       proOptions={proOptions}
       onContextMenu={preventDefault}
-      {...exposedProps}
+      onConnectEnd={handleConnectEnd}
     >
       {children}
     </ReactFlow>

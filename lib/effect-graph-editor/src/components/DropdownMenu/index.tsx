@@ -1,13 +1,15 @@
 import type { FC, ReactElement, ReactNode } from 'react';
-import { ChevronRightIcon } from '@radix-ui/react-icons';
+import {
+  ChevronRightIcon,
+  DragHandleVerticalIcon,
+} from '@radix-ui/react-icons';
 import { DropdownMenu as RadixDrop } from 'radix-ui';
 import styles from './index.module.css';
 import type { NInternal } from '@/internal/types';
+import { useEditorStore } from '@/store';
+import { useMemorizedFn } from '@/tools/ahooks';
 
-export interface DropdownMenuProps {
-  openConfig?: NInternal.OpenMenuConfig | null;
-  onOpenChange?: (open: boolean) => void;
-}
+export interface DropdownMenuProps {}
 
 function Render({ item }: { item: NInternal.MenuItems }): ReactElement | null {
   if (item.type === 'item') {
@@ -50,19 +52,29 @@ function Render({ item }: { item: NInternal.MenuItems }): ReactElement | null {
   return null;
 }
 
-const DropdownMenu: FC<DropdownMenuProps> = ({ openConfig, onOpenChange }) => {
-  const open = !!openConfig;
+const DropdownMenu: FC<DropdownMenuProps> = () => {
+  const { openMenuConfig, setOpenMenuConfig } = useEditorStore(
+    ({ openMenuConfig, setOpenMenuConfig }) => ({
+      openMenuConfig,
+      setOpenMenuConfig,
+    })
+  );
+  const open = !!openMenuConfig;
+
+  const handleClose = useMemorizedFn(() => {
+    setOpenMenuConfig(null);
+  });
 
   return (
-    <RadixDrop.Root open={open} onOpenChange={onOpenChange}>
+    <RadixDrop.Root open={open} onOpenChange={handleClose}>
       <RadixDrop.Trigger asChild>
         <div
           className={styles.trigger}
-          style={{ left: openConfig?.x, top: openConfig?.y }}
+          style={{ left: openMenuConfig?.x, top: openMenuConfig?.y }}
         ></div>
       </RadixDrop.Trigger>
       <RadixDrop.Content className={styles.DropdownMenuContent} side="right">
-        {openConfig?.config.items.map((item, idx) => (
+        {openMenuConfig?.config.items.map((item, idx) => (
           <Render key={idx} item={item} />
         ))}
       </RadixDrop.Content>

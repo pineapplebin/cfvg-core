@@ -1,69 +1,30 @@
-import { useCallback, type FC } from 'react';
-import {
-  ReactFlow,
-  Background,
-  Controls,
-  BackgroundVariant,
-  type ProOptions,
-  type OnConnectEnd,
-  ReactFlowProvider,
-} from '@xyflow/react';
-import { useNodeTypes } from '@/data/component-types';
-import { useGraphDataStore } from '@/data/graph-data';
-import { preventDefault, useMemorizedFn } from '@/tools/ahooks';
+import { type FC } from 'react';
+import { Background, Controls, BackgroundVariant } from '@xyflow/react';
+import type { NEffectGraph } from '@/types';
 import DropdownMenu from '../DropdownMenu';
-
-import styles from './index.module.css';
+import MixedFlowProvider from './MixedFlowProvider';
 import FlowStateHandler from './FlowStateHandler';
 
-const proOptions: ProOptions = { hideAttribution: true };
+import styles from './index.module.css';
 
-const Editor: FC = () => {
-  const state = useGraphDataStore();
+export interface GraphEditorProps {
+  initialValue?: NEffectGraph.EffectLogic;
+  onChange?: (value: NEffectGraph.EffectLogic) => void;
+}
 
-  const handleOnConnectEnd = useMemorizedFn<OnConnectEnd>((ev, connection) => {
-    console.log(ev, connection);
-    if (!connection.toNode && !connection.toHandle) {
-      if ('clientX' in ev) {
-        state.setMenuOpenConfig({
-          x: ev.clientX,
-          y: ev.clientY,
-          config: {
-            items: [
-              {
-                type: 'sub-group',
-                label: '添加',
-                items: [
-                  {
-                    type: 'item',
-                    label: '添加节点',
-                    onClick: () => {
-                      console.log('add node');
-                    },
-                  },
-                ],
-              },
-            ],
-          },
-        });
-      } else {
-        // show popup menu
-      }
-    }
-  });
-
+const Editor: FC<GraphEditorProps> = ({ initialValue, onChange }) => {
   return (
     <div className={styles.container}>
-      <ReactFlowProvider initialNodes={state.nodes}>
+      <MixedFlowProvider
+        initialNodes={initialValue?.nodes}
+        initialEdges={initialValue?.edges}
+      >
         <FlowStateHandler>
           <Background variant={BackgroundVariant.Dots} />
           <Controls />
         </FlowStateHandler>
-        <DropdownMenu
-          openConfig={state.menuOpenConfig}
-          onOpenChange={() => state.setMenuOpenConfig(null)}
-        />
-      </ReactFlowProvider>
+        <DropdownMenu />
+      </MixedFlowProvider>
     </div>
   );
 };
