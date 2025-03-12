@@ -3,12 +3,12 @@
   "private": true,
   "type": "module",
   "workspaces": [
-    "protocol",
-    "implements/web-core"
+    "app/*",
+    "lib/*"
   ],
   "scripts": {
-    "dev": "turbo run dev --filter \"./{implements/*,protocol}\"",
-    "build": "turbo run build --filter \"./implements/*\""
+    "dev:lib": "turbo run dev --filter \"./lib/*\"",
+    "build:lib": "turbo run build --filter \"./lib/*\""
   },
   "devDependencies": {
     "@types/node": "^22.13.9",

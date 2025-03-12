@@ -1,6 +1,7 @@
 packages:
-  - protocol
-  - implements/*
+  - app/*
+  - lib/*
+
 onlyBuiltDependencies:
   - '@esbuild/darwin-arm64'
   - '@isaacs/cliui'

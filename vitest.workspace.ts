@@ -1,1 +1,1 @@
-export default ['implements/*'];
+export default ['lib/*'];

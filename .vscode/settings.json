@@ -1,3 +1,11 @@
 {
-  "cSpell.words": ["cfvg", "Renderable", "tsup", "xyflow", "yimieji"]
+  "cSpell.words": [
+    "ahooks",
+    "cfvg",
+    "Renderable",
+    "tsup",
+    "xyflow",
+    "yimieji",
+    "zustand"
+  ]
 }
