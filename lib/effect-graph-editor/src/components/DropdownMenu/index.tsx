@@ -1,8 +1,5 @@
-import type { FC, ReactElement, ReactNode } from 'react';
-import {
-  ChevronRightIcon,
-  DragHandleVerticalIcon,
-} from '@radix-ui/react-icons';
+import { useMemo, type FC, type ReactElement } from 'react';
+import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { DropdownMenu as RadixDrop } from 'radix-ui';
 import styles from './index.module.css';
 import type { NInternal } from '@/internal/types';
@@ -11,12 +8,18 @@ import { useMemorizedFn } from '@/tools/ahooks';
 
 export interface DropdownMenuProps {}
 
-function Render({ item }: { item: NInternal.MenuItems }): ReactElement | null {
+function Render({
+  item,
+  context,
+}: {
+  item: NInternal.MenuItems;
+  context: Parameters<NInternal.MenuNormalItem['onClick']>[0];
+}): ReactElement | null {
   if (item.type === 'item') {
     return (
       <RadixDrop.Item
         className={styles.DropdownMenuItem}
-        onClick={item.onClick}
+        onClick={() => item.onClick(context)}
       >
         {item.label}
       </RadixDrop.Item>
@@ -42,7 +45,7 @@ function Render({ item }: { item: NInternal.MenuItems }): ReactElement | null {
           alignOffset={-5}
         >
           {item.items.map((sub, idx) => (
-            <Render key={idx} item={sub} />
+            <Render key={idx} item={sub} context={context} />
           ))}
         </RadixDrop.SubContent>
       </RadixDrop.Sub>
@@ -65,6 +68,12 @@ const DropdownMenu: FC<DropdownMenuProps> = () => {
     setOpenMenuConfig(null);
   });
 
+  const context = useMemo(() => {
+    return {
+      config: openMenuConfig!,
+    };
+  }, [openMenuConfig]);
+
   return (
     <RadixDrop.Root open={open} onOpenChange={handleClose}>
       <RadixDrop.Trigger asChild>
@@ -75,7 +84,7 @@ const DropdownMenu: FC<DropdownMenuProps> = () => {
       </RadixDrop.Trigger>
       <RadixDrop.Content className={styles.DropdownMenuContent} side="right">
         {openMenuConfig?.config.items.map((item, idx) => (
-          <Render key={idx} item={item} />
+          <Render key={idx} item={item} context={context} />
         ))}
       </RadixDrop.Content>
     </RadixDrop.Root>

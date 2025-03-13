@@ -2,8 +2,8 @@ import { type FC } from 'react';
 import { Background, Controls, BackgroundVariant } from '@xyflow/react';
 import type { NEffectGraph } from '@/types';
 import DropdownMenu from '../DropdownMenu';
-import MixedFlowProvider from './MixedFlowProvider';
-import FlowStateHandler from './FlowStateHandler';
+import MixedStateProvider from './MixedStateProvider';
+import FlowEventHandler from './FlowEventHandler';
 
 import styles from './index.module.css';
 
@@ -13,18 +13,19 @@ export interface GraphEditorProps {
 }
 
 const Editor: FC<GraphEditorProps> = ({ initialValue, onChange }) => {
+  console.log(initialValue);
   return (
     <div className={styles.container}>
-      <MixedFlowProvider
+      <MixedStateProvider
         initialNodes={initialValue?.nodes}
         initialEdges={initialValue?.edges}
       >
-        <FlowStateHandler>
+        <FlowEventHandler>
           <Background variant={BackgroundVariant.Dots} />
           <Controls />
-        </FlowStateHandler>
+        </FlowEventHandler>
         <DropdownMenu />
-      </MixedFlowProvider>
+      </MixedStateProvider>
     </div>
   );
 };

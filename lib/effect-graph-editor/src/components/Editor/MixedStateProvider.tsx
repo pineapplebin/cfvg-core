@@ -11,6 +11,8 @@ const GraphStateWrapper: FC<PropsWithChildren<{}>> = ({ children }) => {
   const flowStore = useStoreApi();
   const [store] = useState(() => createStore({ flowStore }));
 
+  console.log(flowStore, store);
+
   return (
     <MixedFlowContext.Provider value={store}>
       {children}
@@ -23,7 +25,7 @@ type ReactFlowProviderProps = ComponentProps<typeof ReactFlowProvider>;
 export interface MixedFlowProviderProps
   extends Pick<ReactFlowProviderProps, 'initialNodes' | 'initialEdges'> {}
 
-const MixedFlowProvider: FC<PropsWithChildren<MixedFlowProviderProps>> = ({
+const MixedStateProvider: FC<PropsWithChildren<MixedFlowProviderProps>> = ({
   children,
   initialEdges,
   initialNodes,
@@ -35,4 +37,4 @@ const MixedFlowProvider: FC<PropsWithChildren<MixedFlowProviderProps>> = ({
   );
 };
 
-export default MixedFlowProvider;
+export default MixedStateProvider;

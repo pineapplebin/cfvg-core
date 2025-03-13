@@ -10,6 +10,7 @@ async function main() {
         type: 'entry',
         position: { x: 0, y: 0 },
         data: { desc: '效果' },
+        draggable: false,
       },
     ],
     edges: [],

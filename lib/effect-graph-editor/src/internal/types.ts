@@ -1,4 +1,5 @@
-import type { NEffectGraph } from '..';
+import type { NEffectGraph } from '../types';
+import { type NodeChange as FlowNodeChange, type Node } from '@xyflow/react';
 
 export namespace NInternal {
   export interface MenuSeparator {
@@ -8,7 +9,7 @@ export namespace NInternal {
   export interface MenuNormalItem {
     type: 'item';
     label: string;
-    onClick: () => void;
+    onClick: (ctx: { config: OpenMenuConfig }) => void;
   }
 
   export interface MenuSubGroup {
@@ -29,4 +30,14 @@ export namespace NInternal {
     y: number;
     config: MenuSetting;
   };
+
+  export type NodeDataChange<N extends Node = NEffectGraph.Nodes> = {
+    type: 'data';
+    id: string;
+    data: N['data'];
+  };
+
+  export type NodeChange =
+    | FlowNodeChange<NEffectGraph.Nodes>
+    | NodeDataChange<NEffectGraph.Nodes>;
 }
