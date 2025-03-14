@@ -6,12 +6,11 @@ import {
 } from 'react';
 import { ReactFlowProvider, useStoreApi } from '@xyflow/react';
 import { createStore, MixedFlowContext } from '@/store';
+import type { NEffectGraph } from '@/types';
 
 const GraphStateWrapper: FC<PropsWithChildren<{}>> = ({ children }) => {
-  const flowStore = useStoreApi();
+  const flowStore = useStoreApi<NEffectGraph.Nodes>();
   const [store] = useState(() => createStore({ flowStore }));
-
-  console.log(flowStore, store);
 
   return (
     <MixedFlowContext.Provider value={store}>

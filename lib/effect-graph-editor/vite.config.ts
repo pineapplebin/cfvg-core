@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import rollupPeerDepsExternal from 'rollup-plugin-peer-deps-external';
 import viteDts from 'vite-plugin-dts';
 import viteReact from '@vitejs/plugin-react';
+import viteUnocss from 'unocss/vite';
 
 export default defineConfig({
   resolve: {
@@ -15,6 +16,7 @@ export default defineConfig({
   },
   plugins: [
     viteReact(),
+    viteUnocss({ mode: 'global' }),
     viteDts({
       exclude: ['dev'],
     }),

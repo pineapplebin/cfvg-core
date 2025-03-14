@@ -9,10 +9,15 @@ export interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ title }) => {
   return (
-    <div className={cx(styles.container)}>
-      <div className={styles.mask}></div>
-      <div className={styles.contentHolder}>
-        <div className={styles.title}>{title}</div>
+    <div className={cx('relative w-full')}>
+      <div className={cx('absolute size-full', styles.mask)}></div>
+      <div
+        className={cx(
+          'relative w-full min-h-28 px-8 py-4',
+          'flex items-center'
+        )}
+      >
+        <div className={cx(styles.title)}>{title}</div>
       </div>
     </div>
   );

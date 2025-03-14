@@ -1,11 +1,10 @@
 import { type FC } from 'react';
+import { cx } from '@/tools/cx';
 import { Background, Controls, BackgroundVariant } from '@xyflow/react';
 import type { NEffectGraph } from '@/types';
 import DropdownMenu from '../DropdownMenu';
 import MixedStateProvider from './MixedStateProvider';
 import FlowEventHandler from './FlowEventHandler';
-
-import styles from './index.module.css';
 
 export interface GraphEditorProps {
   initialValue?: NEffectGraph.EffectLogic;
@@ -13,9 +12,8 @@ export interface GraphEditorProps {
 }
 
 const Editor: FC<GraphEditorProps> = ({ initialValue, onChange }) => {
-  console.log(initialValue);
   return (
-    <div className={styles.container}>
+    <div className={cx('size-full min-w-150 min-h-150 box-border text-14')}>
       <MixedStateProvider
         initialNodes={initialValue?.nodes}
         initialEdges={initialValue?.edges}

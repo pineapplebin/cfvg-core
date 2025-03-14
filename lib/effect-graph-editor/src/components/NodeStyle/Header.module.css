@@ -1,24 +1,6 @@
-.container {
-  position: relative;
-  width: 100%;
-  min-height: 28px;
-}
-
 .mask {
-  position: absolute;
-  width: 100%;
-  height: 100%;
   background: radial-gradient(rgba(91, 176, 255, 0.8) 0%, rgb(23, 73, 113) 80%);
-
   box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1);
-}
-
-.contentHolder {
-  position: relative;
-  width: 100%;
-  padding: 4px 8px;
-  display: flex;
-  align-items: center;
 }
 
 .title {

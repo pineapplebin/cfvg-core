@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { useStoreWithEqualityFn as useZustandStore } from 'zustand/traditional';
+import { shallow } from 'zustand/shallow';
 import { MixedFlowContext } from './context';
-import type { GraphEditorState } from '.';
+import type { GraphEditorState } from './type';
 
 export function useEditorStore<U = unknown>(
   selector: (state: GraphEditorState) => U,
@@ -15,5 +16,5 @@ export function useEditorStore<U = unknown>(
     );
   }
 
-  return useZustandStore(store, selector, eq);
+  return useZustandStore(store, selector, eq ?? shallow);
 }
