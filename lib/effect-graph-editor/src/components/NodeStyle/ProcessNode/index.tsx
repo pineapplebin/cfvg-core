@@ -1,10 +1,12 @@
 import type { FC } from 'react';
 import type { NodeProps } from '@xyflow/react';
+import { IoPlay } from 'react-icons/io5';
 import { AiOutlineNodeIndex } from 'react-icons/ai';
 import { cx } from '@/tools/cx';
 import type { NEffectGraph } from '@/types';
-import Header from '../Header';
 import { Icons } from '@/components/Icons';
+import Header from '../Header';
+import CustomHandle from '@/components/CustomHandle';
 
 export interface ProcessNodeProps extends NodeProps<NEffectGraph.ProcessNode> {}
 
@@ -28,6 +30,15 @@ const ProcessNode: FC<ProcessNodeProps> = ({ data }) => {
           />
         }
       />
+      <div className="flex items-start">
+        <div className="grow-1 pl-4 py-4">
+          <CustomHandle className="size-20!" type="target">
+            <Icons icon={IoPlay} />
+          </CustomHandle>
+        </div>
+        <div className="w-6 shrink-0"></div>
+        <div className="grow-1"></div>
+      </div>
     </div>
   );
 };

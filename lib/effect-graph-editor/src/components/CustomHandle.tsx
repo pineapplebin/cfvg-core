@@ -16,19 +16,6 @@ const CustomHandle: FC<PropsWithChildren<CustomHandleProps>> = ({
   style,
   type,
 }) => {
-  // return (
-  //   <div className={cx(className, 'relative block')} style={style}>
-  //     <div className="absolute size-full z-1 pointer-events-none">
-  //       {children}
-  //     </div>
-  //     <Handle
-  //       className={cx(commonStyle.normalizeHandle, 'absolute size-full z-2')}
-  //       type={type}
-  //       position={Position.Bottom}
-  //     />
-  //   </div>
-  // );
-
   return (
     <Handle
       className={cx(commonStyle.normalizeHandle, className)}
