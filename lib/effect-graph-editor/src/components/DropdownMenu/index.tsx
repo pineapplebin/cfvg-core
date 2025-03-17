@@ -1,26 +1,41 @@
 import { useMemo, type FC, type ReactElement } from 'react';
-import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { DropdownMenu as RadixDrop } from 'radix-ui';
-import styles from './index.module.css';
+import { MdKeyboardArrowRight } from 'react-icons/md';
 import type { NInternal } from '@/internal/types';
 import { useEditorStore } from '@/store';
 import { useMemorizedFn } from '@/tools/ahooks';
 
+import styles from './index.module.css';
+import { Icons } from '../Icons';
+import type { IconType } from 'react-icons';
+
 export interface DropdownMenuProps {}
 
-function Render({
-  item,
-  context,
-}: {
+const Indicator: FC<{
+  item: Exclude<NInternal.MenuItems, NInternal.MenuSeparator>;
+}> = ({ item }) => {
+  if (!item.icon) {
+    return null;
+  }
+  if (typeof item.icon === 'function') {
+    return <Icons icon={item.icon as IconType} />;
+  }
+  return item.icon as ReactElement;
+};
+
+const Render: FC<{
   item: NInternal.MenuItems;
   context: Parameters<NInternal.MenuNormalItem['onClick']>[0];
-}): ReactElement | null {
+}> = ({ item, context }) => {
   if (item.type === 'item') {
     return (
       <RadixDrop.Item
         className={styles.DropdownMenuItem}
         onClick={() => item.onClick(context)}
       >
+        <RadixDrop.ItemIndicator className={styles.DropdownMenuItemIndicator}>
+          <Indicator item={item} />
+        </RadixDrop.ItemIndicator>
         {item.label}
       </RadixDrop.Item>
     );
@@ -36,14 +51,17 @@ function Render({
         <RadixDrop.SubTrigger className={styles.DropdownMenuSubTrigger}>
           {item.label}
           <div className={styles.RightSlot}>
-            <ChevronRightIcon />
+            <Icons icon={MdKeyboardArrowRight} />
           </div>
         </RadixDrop.SubTrigger>
         <RadixDrop.SubContent
           className={styles.DropdownMenuSubContent}
-          sideOffset={2}
-          alignOffset={-5}
+          sideOffset={-4}
+          alignOffset={-3}
         >
+          <RadixDrop.ItemIndicator className={styles.DropdownMenuItemIndicator}>
+            <Indicator item={item} />
+          </RadixDrop.ItemIndicator>
           {item.items.map((sub, idx) => (
             <Render key={idx} item={sub} context={context} />
           ))}
@@ -53,7 +71,7 @@ function Render({
   }
 
   return null;
-}
+};
 
 const DropdownMenu: FC<DropdownMenuProps> = () => {
   const { openMenuConfig, setOpenMenuConfig } = useEditorStore(

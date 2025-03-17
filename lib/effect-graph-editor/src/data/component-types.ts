@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import type { NodeTypes } from '@xyflow/react';
-import EntryNode from '@/components/NodeStyle/EntryNode/index';
-import ProcessNode from '@/components/NodeStyle/ProcessNode/index';
+import EntryNode from '@/components/NodeStyle/EntryNode';
+import ProcessNode from '@/components/NodeStyle/ProcessNode';
 import Node from '@/components/NodeStyle/Node';
 
 const componentNodeTypes: NodeTypes = {

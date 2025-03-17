@@ -3,5 +3,7 @@ import { presetRemToPx } from '@unocss/preset-rem-to-px';
 
 export default defineConfig({
   presets: [presetWind3(), presetRemToPx({ baseFontSize: 4 })],
-  rules: [['flex-center', { justifyContent: 'center', alignItems: 'center' }]],
+  rules: [
+    ['flex-center', { 'justify-content': 'center', 'align-items': 'center' }],
+  ],
 });

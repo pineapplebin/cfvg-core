@@ -12,7 +12,7 @@ export function getCreateNodesMenuSetting({
         items: [
           {
             type: 'item',
-            label: '节点',
+            label: '流程节点',
             onClick: ({ config }) => {
               applyNodeChanges([
                 {

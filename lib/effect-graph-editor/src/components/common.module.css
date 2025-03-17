@@ -1,0 +1,9 @@
+.normalizeHandle {
+  position: unset;
+  width: auto;
+  height: auto;
+  transform: none;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}

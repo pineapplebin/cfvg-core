@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom';
 import { GraphEditor, type NEffectGraph } from '../src';
 import './normalize.css';
-// import 'unocss/normalize';
 
 async function main() {
   const value: NEffectGraph.EffectLogic = {
@@ -12,6 +11,7 @@ async function main() {
         position: { x: 0, y: 0 },
         data: { desc: '效果' },
         draggable: false,
+        selectable: false,
       },
     ],
     edges: [],

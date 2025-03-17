@@ -1,14 +1,22 @@
-import { createWithEqualityFn } from 'zustand/traditional';
-import type { GraphEditorState } from './type';
+import type { StoreApi } from 'zustand';
+import {
+  createWithEqualityFn,
+  type UseBoundStoreWithEqualityFn,
+} from 'zustand/traditional';
 import type { useStoreApi } from '@xyflow/react';
+import type { GraphEditorState } from './type';
 import { applyChanges } from './utils/apply-changes';
-import type { NEffectGraph } from '..';
+import type { NEffectGraph } from '../types';
 
 export interface CreateStoreOptions {
   flowStore: ReturnType<typeof useStoreApi<NEffectGraph.Nodes>>;
 }
 
-export function createStore({ flowStore }: CreateStoreOptions) {
+export function createStore({
+  flowStore,
+}: CreateStoreOptions): UseBoundStoreWithEqualityFn<
+  StoreApi<GraphEditorState>
+> {
   return createWithEqualityFn<GraphEditorState>((set, get) => {
     return {
       openMenuConfig: null,
@@ -22,7 +30,6 @@ export function createStore({ flowStore }: CreateStoreOptions) {
 
       applyNodeChanges: (changes) => {
         const { nodes, setNodes } = flowStore.getState();
-        console.log('applyChanges', nodes, changes);
         const newNodes = applyChanges(changes, nodes);
         setNodes(newNodes);
       },

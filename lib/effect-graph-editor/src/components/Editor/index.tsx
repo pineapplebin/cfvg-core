@@ -17,6 +17,7 @@ const Editor: FC<GraphEditorProps> = ({ initialValue, onChange }) => {
       <MixedStateProvider
         initialNodes={initialValue?.nodes}
         initialEdges={initialValue?.edges}
+        onChange={onChange}
       >
         <FlowEventHandler>
           <Background variant={BackgroundVariant.Dots} />

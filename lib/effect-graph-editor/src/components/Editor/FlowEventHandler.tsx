@@ -1,12 +1,5 @@
 import type { FC, MouseEventHandler, PropsWithChildren } from 'react';
-import {
-  ReactFlow,
-  type ProOptions,
-  type OnConnectEnd,
-  useStore,
-  useReactFlow,
-  type OnNodesChange,
-} from '@xyflow/react';
+import { ReactFlow, type ProOptions, type OnConnectEnd } from '@xyflow/react';
 import { useMemorizedFn } from '@/tools/ahooks';
 import { useNodeTypes } from '@/data/component-types';
 import { useEditorStore } from '@/store';
